@@ -9,7 +9,8 @@ class Book extends Component {
             books: [],
             page: 0,
             error: null,
-            filterTerm: []
+            filterTerm: [],
+            searchTerm: "Search"
         }
     }
 
@@ -64,6 +65,22 @@ class Book extends Component {
         }
     }
 
+    onSearch(e) {
+        e.preventDefault()
+        const { history } = this.props
+        const filter = {
+            type: "all",
+            values: [e.target.value]
+        }
+    
+        this.setState({ filterTerm: filter, searchTerm: e.target.value })
+        this.fetchBooks(0, [filter])
+        history.push({
+            pathname: '/books',
+            search: "?" + new URLSearchParams({page: 1, filterBy: e.target.value}).toString()
+        })
+    }
+
     componentDidMount() {
         const { page } = this.state
         this.fetchBooks(page, [])
@@ -71,7 +88,7 @@ class Book extends Component {
     }
 
     render() {
-        const { books, page } = this.state
+        const { books, page, searchTerm } = this.state
         let renderBooks
         
         if (books.length !== 0) {
@@ -81,6 +98,7 @@ class Book extends Component {
         }
         return (
             <div>
+                <input type="text" onChange={(e) => this.onSearch(e)} placeholder={searchTerm} value={searchTerm}/>
                 <div>
                     <ReactPaginate pageCount={122} pageRangeDisplayed={5} marginPagesDisplayed={2} initialPage={page} disableInitialCallback={true} onPageChange={(e) => this.changePage(e)} />
                 </div>
