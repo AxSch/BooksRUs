@@ -8,19 +8,21 @@ const BookListItem = ({ book }) => {
         })
     }
     return (
-        <div key={book.id}>
-            <div>
-                Book {book.id}
-                Title {book.book_title}
-                Author {renderAuthors(book)}
+        <div className="m-3 bg-secondary p-3 rounded-md" key={book.id}>
+            <div className="flex flex-row text-lg text-gray-900 text-xl font-medium">
+                <h1>{book.book_title}</h1>
             </div>
-            <div>
-                Pub. year {book.book_publication_year}
-                Pub. city {book.book_publication_city}
-                Pub. country {book.book_publication_country}
-                No. of pages {book.book_pages}
+            <div className="text-sm text-gray-700">
+                <span>By {renderAuthors(book)}</span>
+            </div>
+            <div className="flex flex-row text-xs justify-between flex-wrap text-gray-700 pt-6">
+                <span>Pub. year: {book.book_publication_year}</span>
+                <span>Pub. city: {book.book_publication_city}</span>
+                <span>Pub. country: {book.book_publication_country}</span>
+                <span>No. of pages: {book.book_pages}</span>
             </div>
         </div>
+        
     )
 }
 
