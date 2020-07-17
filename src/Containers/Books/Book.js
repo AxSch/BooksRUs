@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import BookList from '../../Components/BookList/BookList'
+import ReactPaginate from 'react-paginate'
 
 class Book extends Component {
     constructor(props) {
@@ -40,7 +41,7 @@ class Book extends Component {
     }
 
     render() {
-        const { books } = this.state
+        const { books, page } = this.state
         let renderBooks
         
         if (books.length !== 0) {
@@ -50,6 +51,9 @@ class Book extends Component {
         }
         return (
             <div>
+                <div>
+                    <ReactPaginate pageCount={122} pageRangeDisplayed={5} marginPagesDisplayed={2} initialPage={page} disableInitialCallback={true} onPageChange={(e) => this.changePage(e)} />
+                </div>
                 {renderBooks}
             </div>
         )
