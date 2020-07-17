@@ -37,11 +37,11 @@ class Book extends Component {
     }
 
     changePage(e) {
-        const { filterTerm } = this.state
+        const { filterTerm, searchTerm } = this.state
         const { history } = this.props
         const selectedPage = e["selected"]
     
-        if (filterTerm !== []) {
+        if (filterTerm !== [] && searchTerm !== "Search") {
             this.setState({ page: selectedPage })
             this.fetchBooks(selectedPage, [filterTerm])
             if (filterTerm["values"][0] === "") {
