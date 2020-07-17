@@ -1,5 +1,5 @@
 {
-  "name": "skeleton-tailwind",
+  "name": "ontrack-test",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1"
   },
   "scripts": {
@@ -35,6 +36,7 @@
   "devDependencies": {
     "autoprefixer": "^9.8.0",
     "postcss-cli": "^7.1.1",
+    "react-paginate": "^6.3.2",
     "tailwindcss": "^1.4.6"
   }
 }
