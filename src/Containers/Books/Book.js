@@ -123,7 +123,7 @@ class Book extends Component {
                         <h1 className="text-2xl text-white font-display ml-4">Books R Us</h1>
                     </div>
                     <div className="bg-secondary rounded-md mr-2">
-                        <input className="rounded-md p-2" type="text" onChange={(e) => this.onSearch(e)} placeholder={searchTerm} value={searchTerm} />
+                        <input className="rounded-full p-2" type="text" onChange={(e) => this.onSearch(e)} placeholder={searchTerm} value={searchTerm} />
                     </div>
                 </div>
                 <div className="flex flex-row justify-end xl:w-screen">
