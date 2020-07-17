@@ -114,13 +114,32 @@ class Book extends Component {
         if (books.length !== 0) {
             renderBooks = <BookList booksData={books} />
         } else {
-            renderBooks = <div>No more results to show</div>
+            renderBooks = <div className="flex flex-row justify-center text-gray-700 text-xl">No more results to show</div>
         }
         return (
-            <div>
-                <input type="text" onChange={(e) => this.onSearch(e)} placeholder={searchTerm} value={searchTerm} />
-                <div>
-                    <ReactPaginate pageCount={122} pageRangeDisplayed={5} marginPagesDisplayed={2} initialPage={page} disableInitialCallback={true} onPageChange={(e) => this.changePage(e)} />
+            <div className="container w-full">
+                <div className="flex flex-row p-4 bg-primary justify-between w-screen items-center">
+                    <div>
+                        <h1 className="text-2xl text-white font-display ml-4">Books R Us</h1>
+                    </div>
+                    <div className="bg-secondary rounded-md mr-2">
+                        <input className="rounded-md p-2" type="text" onChange={(e) => this.onSearch(e)} placeholder={searchTerm} value={searchTerm} />
+                    </div>
+                </div>
+                <div className="flex flex-row justify-end xl:w-screen">
+                    <ReactPaginate 
+                        pageCount={122} 
+                        pageRangeDisplayed={5} 
+                        marginPagesDisplayed={2} 
+                        initialPage={page} 
+                        disableInitialCallback={true} 
+                        onPageChange={(e) => this.changePage(e)}
+                        pageClassName="hover:bg-accent rounded-md bg-secondary p-2 m-1"
+                        activeClassName="rounded-md bg-accent"
+                        containerClassName="flex flex-row m-4 p-2 items-center flex-wrap xl:justify-end"
+                        nextClassName="hover:bg-accent bg-secondary rounded-md m-1 p-2"
+                        previousClassName="hover:bg-accent bg-secondary rounded-md m-1 p-2"
+                    />
                 </div>
                 {renderBooks}
             </div>
