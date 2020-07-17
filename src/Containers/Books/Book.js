@@ -9,6 +9,7 @@ class Book extends Component {
             books: [],
             page: 0,
             error: null,
+            filterTerm: []
         }
     }
 
@@ -32,6 +33,35 @@ class Book extends Component {
             this.setState({ error: JSON.stringify(error) })
         }
 
+    }
+
+    changePage(e) {
+        const { filterTerm } = this.state
+        const { history } = this.props
+        const selectedPage = e["selected"]
+    
+        if (filterTerm !== []) {
+            this.setState({ page: selectedPage })
+            this.fetchBooks(selectedPage, [filterTerm])
+            if (filterTerm["values"][0] === "") {
+                history.push({
+                    pathname: "/books",
+                    search: "?" + new URLSearchParams({page: selectedPage + 1}).toString()
+                })
+            } else {
+                history.push({
+                    pathname: "/books",
+                    search: "?" + new URLSearchParams({page: selectedPage + 1, filterBy: filterTerm['values'][0]}).toString()
+                })
+            }
+        } else {
+            this.setState({ page: selectedPage })
+            this.fetchBooks(selectedPage, [])
+            history.push({
+                pathname: "/books",
+                search: "?" + new URLSearchParams({page: selectedPage + 1}).toString()
+            })
+        }
     }
 
     componentDidMount() {
