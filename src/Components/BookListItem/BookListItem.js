@@ -9,13 +9,13 @@ const BookListItem = ({ book }) => {
     }
     return (
         <div className="m-3 bg-secondary p-3 rounded-md" key={book.id}>
-            <div className="flex flex-row text-lg text-gray-900 text-xl font-medium">
+            <div className="flex flex-row text-gray-900 text-xl font-medium">
                 <h1>{book.book_title}</h1>
             </div>
-            <div className="text-sm text-gray-700">
+            <div id="bookAuthor" className="text-sm text-gray-700">
                 <span>By {renderAuthors(book)}</span>
             </div>
-            <div className="flex flex-row text-xs justify-between flex-wrap text-gray-700 pt-6">
+            <div id="metadata" className="flex flex-row text-xs justify-between flex-wrap text-gray-700 pt-6">
                 <span>Pub. year: {book.book_publication_year}</span>
                 <span>Pub. city: {book.book_publication_city}</span>
                 <span>Pub. country: {book.book_publication_country}</span>
