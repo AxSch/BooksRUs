@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "ontrack-test",
+=======
+  "name": "booksrus",
+>>>>>>> Change pkg.json "name"
   "version": "0.1.0",
   "private": true,
   "dependencies": {
