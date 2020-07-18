@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import BookList from '../../Components/BookList/BookList'
 import ReactPaginate from 'react-paginate'
+import fetchBooksAPI from '../../Api/api'
 
 class Book extends Component {
     constructor(props) {
@@ -16,24 +17,7 @@ class Book extends Component {
 
     async fetchBooks(pageNo, filters) {
         try {
-            if (pageNo + 1 === 0) {
-                pageNo = 1
-            } else {
-                pageNo += 1
-            }
-            const reqBody = {
-                page: pageNo,
-                itemsPerPage: 20,
-                filters: filters
-            }
-            const books = await fetch('http://nyx.vima.ekt.gr:3000/api/books/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(reqBody)
-            })
-            const data = await books.json()
+            const data = await fetchBooksAPI(pageNo, filters)
             this.setState({ books: data.books })
         } catch (error) {
             this.setState({ error: JSON.stringify(error) })
@@ -109,13 +93,7 @@ class Book extends Component {
 
     render() {
         const { books, page, searchTerm } = this.state
-        let renderBooks
-
-        if (books.length !== 0) {
-            renderBooks = <BookList booksData={books} />
-        } else {
-            renderBooks = <div className="flex flex-row justify-center text-gray-700 text-xl">No more results to show</div>
-        }
+        
         return (
             <div className="container w-full">
                 <div className="flex flex-row p-4 bg-primary justify-between w-screen items-center">
@@ -123,11 +101,12 @@ class Book extends Component {
                         <h1 className="text-2xl text-white font-display ml-4">Books R Us</h1>
                     </div>
                     <div className="bg-secondary rounded-md mr-2">
-                        <input className="rounded-full p-2" type="text" onChange={(e) => this.onSearch(e)} placeholder={searchTerm} value={searchTerm} />
+                        <input id="searchInput" className="rounded-full p-2" type="text" onChange={(e) => this.onSearch(e)} placeholder={searchTerm} value={searchTerm} />
                     </div>
                 </div>
                 <div className="flex flex-row justify-end xl:w-screen">
-                    <ReactPaginate 
+                    <ReactPaginate
+                        id="paginate" 
                         pageCount={122} 
                         pageRangeDisplayed={5} 
                         marginPagesDisplayed={2} 
@@ -141,7 +120,7 @@ class Book extends Component {
                         previousClassName="hover:bg-accent bg-secondary rounded-md m-1 p-2"
                     />
                 </div>
-                {renderBooks}
+                <BookList booksData={books} />
             </div>
         )
     }
